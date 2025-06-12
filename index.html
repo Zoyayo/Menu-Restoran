@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Restoran</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Daftar Menu</h1>
+  </header>
+
+  <section id="menu" class="menu-container"></section>
+
+  <script>
+    const menu = JSON.parse(localStorage.getItem("menuList")) || [];
+    const menuContainer = document.getElementById("menu");
+
+    menu.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "menu-item";
+      div.innerHTML = `
+        <img src="${item.gambar}" alt="${item.nama}">
+        <h3>${item.nama}</h3>
+        <p>${item.harga}</p>
+        ${item.stok && item.stok.toLowerCase() === "habis" ? '<span class="stok-habis">Stok Habis</span>' : ''}
+      `;
+      menuContainer.appendChild(div);
+    });
+  </script>
+</body>
+</html>
